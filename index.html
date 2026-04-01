@@ -36,100 +36,108 @@ fbq('track', 'PageView');
 body {
   margin: 0;
   font-family: 'Inter', Arial, sans-serif;
-  background: linear-gradient(180deg, #0a0a0a, #111);
+  background: #0b0b0b;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
-/* CONTENEDOR */
-.container {
-  background: #121212;
-  padding: 28px;
-  border-radius: 16px;
-  width: 92%;
-  max-width: 420px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+/* HEADER */
+.header {
+  padding: 20px 18px 10px;
 }
 
-/* TITULOS */
 h1 {
-  font-size: 24px;
-  margin-bottom: 5px;
+  font-size: 22px;
+  margin: 0;
 }
 
 .sub {
-  font-size: 14px;
+  font-size: 13px;
   color: #9b9b9b;
-  margin-bottom: 25px;
+  margin-top: 5px;
+}
+
+/* CONTENIDO */
+.container {
+  padding: 10px 16px 120px; /* espacio para botón fijo */
+  max-width: 500px;
+  margin: auto;
 }
 
 /* PREGUNTAS */
 .question {
-  margin-top: 22px;
+  margin-top: 26px;
 }
 
 .question p {
   font-size: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* OPCIONES */
 .option {
-  display: block;
-  background: #1d1d1d;
-  padding: 14px;
-  margin-top: 8px;
-  border-radius: 10px;
-  cursor: pointer;
+  background: #181818;
+  padding: 16px;
+  margin-top: 10px;
+  border-radius: 12px;
   border: 1px solid #2a2a2a;
+  cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 14px;
 }
 
-.option:hover {
-  background: #262626;
+.option:active {
+  transform: scale(0.98);
 }
 
 .option.selected {
   border: 1px solid #25D366;
   background: rgba(37, 211, 102, 0.15);
-  transform: scale(1.02);
 }
 
-/* BOTON */
-button {
+/* BOTON FIJO */
+.fixed-button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 15px 16px calc(15px + env(safe-area-inset-bottom));
+  background: #0b0b0b;
+  border-top: 1px solid #1f1f1f;
+}
+
+.fixed-button button {
+  width: 100%;
+  padding: 16px;
   background: linear-gradient(135deg, #25D366, #1ebe5d);
   color: black;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(37,211,102,0.3);
+.fixed-button button:active {
+  transform: scale(0.97);
 }
 
-button:active {
-  transform: scale(0.98);
-}
+/* DESKTOP */
+@media (min-width: 768px) {
 
-/* MOBILE */
-@media (max-width: 480px) {
-  .container {
-    padding: 22px;
+  body {
+    display: flex;
+    justify-content: center;
   }
 
-  h1 {
-    font-size: 20px;
+  .app {
+    width: 420px;
+    background: #111;
+    min-height: 100vh;
+  }
+
+  .fixed-button {
+    width: 420px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -139,10 +147,14 @@ button:active {
 
 <body>
 
-<div class="container">
+<div class="app">
 
-<h1>Acceso canal mayorista</h1>
-<p class="sub">Solo para personas que quieran revender productos</p>
+<div class="header">
+  <h1>Acceso canal mayorista</h1>
+  <p class="sub">Solo para personas que quieran revender productos</p>
+</div>
+
+<div class="container">
 
 <form id="form">
 
@@ -161,7 +173,6 @@ button:active {
 <div class="option" data-q="cantidad">+50</div>
 </div>
 
-<!-- 🔥 NUEVA PREGUNTA -->
 <div class="question">
 <p>¿Cuándo sería tu próxima compra?</p>
 <div class="option" data-q="compra">En los próximos 10 días</div>
@@ -169,9 +180,14 @@ button:active {
 <div class="option" data-q="compra">Solo estoy mirando</div>
 </div>
 
-<button type="submit">Acceder al canal</button>
-
 </form>
+
+</div>
+
+<!-- BOTON FIJO -->
+<div class="fixed-button">
+  <button onclick="enviar()">Acceder al canal</button>
+</div>
 
 </div>
 
@@ -191,8 +207,7 @@ document.querySelectorAll(".option").forEach(el => {
   });
 });
 
-document.getElementById("form").addEventListener("submit", function(e) {
-  e.preventDefault();
+function enviar() {
 
   if(!respuestas.ventas || !respuestas.cantidad || !respuestas.compra){
     alert("Completá todas las opciones");
@@ -210,7 +225,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
   setTimeout(() => {
     window.location.href = "https://whatsapp.com/channel/0029Vb7XaaX2P59rBpq4bd47";
   }, 400);
-});
+}
 </script>
 
 </body>
