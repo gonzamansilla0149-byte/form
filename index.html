@@ -1,101 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso Mayorista</title>
+<meta charset="UTF-8">
 
-  <!-- META PIXEL -->
-  <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;
-      n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];
-      t=b.createElement(e);t.async=!0;
-      t.src=v;
-      s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s);
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+<!-- 🚫 BLOQUEA ZOOM EN MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    fbq('init', 'TU_PIXEL_ID');
-    fbq('track', 'PageView');
-  </script>
+<title>Acceso Mayorista</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<!-- META PIXEL -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;
+n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];
+t=b.createElement(e);t.async=!0;
+t.src=v;
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s);
+}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
 
-    .container {
-      background: #1a1a1a;
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
+fbq('init', 'TU_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  -webkit-user-select: none;
+  user-select: none;
+}
 
-    p.sub {
-      font-size: 14px;
-      color: #aaa;
-      margin-bottom: 20px;
-    }
+.container {
+  background: #1a1a1a;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+}
 
-    label {
-      font-size: 14px;
-      display: block;
-      margin-top: 15px;
-      margin-bottom: 5px;
-    }
+h1 {
+  font-size: 22px;
+}
 
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      margin-bottom: 10px;
-    }
+.sub {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background: #25D366;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+.question {
+  margin-top: 20px;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+.option {
+  display: block;
+  background: #2a2a2a;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
 
-    .note {
-      font-size: 12px;
-      color: #777;
-      margin-top: 10px;
-      text-align: center;
-    }
-  </style>
+.option.selected {
+  border: 2px solid #25D366;
+  background: #1f3d2b;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 25px;
+  background: #25D366;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+</style>
 
 </head>
 
@@ -103,49 +98,77 @@
 
 <div class="container">
 
-  <h1>Acceso a canal mayorista</h1>
-  <p class="sub">Completá esto para ingresar al canal exclusivo de revendedores</p>
+<h1>Acceso canal mayorista</h1>
+<p class="sub">Solo para personas que quieran revender productos</p>
 
-  <form id="form">
+<form id="form">
 
-    <label>¿Vendés actualmente?</label>
-    <select id="ventas" required>
-      <option value="">Seleccionar</option>
-      <option>Sí, vendo actualmente</option>
-      <option>No, pero quiero empezar</option>
-      <option>Solo estoy mirando</option>
-    </select>
+<div class="question">
+<p>¿Vendés actualmente?</p>
+<div class="option" data-q="ventas">Sí, vendo actualmente</div>
+<div class="option" data-q="ventas">No, pero quiero empezar</div>
+<div class="option" data-q="ventas">Solo estoy mirando</div>
+</div>
 
-    <label>¿Cuántas unidades podrías vender por semana?</label>
-    <select id="cantidad" required>
-      <option value="">Seleccionar</option>
-      <option>1-5</option>
-      <option>5-20</option>
-      <option>20-50</option>
-      <option>+50</option>
-    </select>
+<div class="question">
+<p>¿Cuántas unidades podrías vender por semana?</p>
+<div class="option" data-q="cantidad">1-5</div>
+<div class="option" data-q="cantidad">5-20</div>
+<div class="option" data-q="cantidad">20-50</div>
+<div class="option" data-q="cantidad">+50</div>
+</div>
 
-    <button type="submit">Acceder al canal</button>
+<div class="question">
+<p>¿Cómo venderías los productos?</p>
+<div class="option" data-q="canal">Instagram</div>
+<div class="option" data-q="canal">WhatsApp</div>
+<div class="option" data-q="canal">Tienda online</div>
+<div class="option" data-q="canal">No sé todavía</div>
+</div>
 
-  </form>
+<button type="submit">Acceder al canal</button>
 
-  <p class="note">Acceso inmediato después de completar</p>
+</form>
 
 </div>
 
 <script>
+let respuestas = {};
+
+document.querySelectorAll(".option").forEach(el => {
+  el.addEventListener("click", () => {
+    let q = el.getAttribute("data-q");
+
+    // limpiar selección anterior
+    document.querySelectorAll(`[data-q="${q}"]`).forEach(e => {
+      e.classList.remove("selected");
+    });
+
+    el.classList.add("selected");
+    respuestas[q] = el.innerText;
+  });
+});
+
 document.getElementById("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
+  // validar
+  if(!respuestas.ventas || !respuestas.cantidad || !respuestas.canal){
+    alert("Completá todas las opciones");
+    return;
+  }
+
   let eventID = Date.now();
 
-  // Evento Lead (optimizado)
-  fbq('track', 'Lead', {}, {eventID});
+  fbq('track', 'Lead', {
+    ventas: respuestas.ventas,
+    cantidad: respuestas.cantidad,
+    canal: respuestas.canal
+  }, {eventID});
 
-  // Delay mínimo para asegurar tracking
-  setTimeout(function(){
-    window.location.href = "https://whatsapp.com/channel/0029Vb7XaaX2P59rBpq4bd47";
-  }, 500);
+  setTimeout(() => {
+    window.location.href = "LINK_DE_TU_CANAL";
+  }, 400);
 });
 </script>
 
