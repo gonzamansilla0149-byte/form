@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acceso Mayorista</title>
 
   <!-- META PIXEL -->
@@ -23,44 +25,127 @@
     fbq('track', 'PageView');
   </script>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p.sub {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #25D366;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+
 </head>
 
 <body>
 
-<h1>Acceso a canal mayorista</h1>
+<div class="container">
 
-<form id="form">
+  <h1>Acceso a canal mayorista</h1>
+  <p class="sub">Completá esto para ingresar al canal exclusivo de revendedores</p>
 
-  <p>¿Vendés actualmente?</p>
-  <select id="ventas">
-    <option>Sí</option>
-    <option>No pero quiero</option>
-    <option>Solo mirando</option>
-  </select>
+  <form id="form">
 
-  <p>¿Cuántas unidades venderías por semana?</p>
-  <select id="cantidad">
-    <option>1-5</option>
-    <option>5-20</option>
-    <option>20-50</option>
-    <option>+50</option>
-  </select>
+    <label>¿Vendés actualmente?</label>
+    <select id="ventas" required>
+      <option value="">Seleccionar</option>
+      <option>Sí, vendo actualmente</option>
+      <option>No, pero quiero empezar</option>
+      <option>Solo estoy mirando</option>
+    </select>
 
-  <br><br>
+    <label>¿Cuántas unidades podrías vender por semana?</label>
+    <select id="cantidad" required>
+      <option value="">Seleccionar</option>
+      <option>1-5</option>
+      <option>5-20</option>
+      <option>20-50</option>
+      <option>+50</option>
+    </select>
 
-  <button type="submit">Acceder al canal</button>
+    <button type="submit">Acceder al canal</button>
 
-</form>
+  </form>
+
+  <p class="note">Acceso inmediato después de completar</p>
+
+</div>
 
 <script>
 document.getElementById("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  // Evento de conversión
-  fbq('track', 'Lead');
+  let eventID = Date.now();
 
-  // Redirección al canal
-  window.location.href = "LINK_DE_TU_CANAL";
+  // Evento Lead (optimizado)
+  fbq('track', 'Lead', {}, {eventID});
+
+  // Delay mínimo para asegurar tracking
+  setTimeout(function(){
+    window.location.href = "LINK_DE_TU_CANAL";
+  }, 500);
 });
 </script>
 
