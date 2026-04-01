@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Acceso Mayorista</title>
+
+  <!-- META PIXEL -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;
+      n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s);
+    }(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', 'TU_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+
+</head>
+
+<body>
+
+<h1>Acceso a canal mayorista</h1>
+
+<form id="form">
+
+  <p>¿Vendés actualmente?</p>
+  <select id="ventas">
+    <option>Sí</option>
+    <option>No pero quiero</option>
+    <option>Solo mirando</option>
+  </select>
+
+  <p>¿Cuántas unidades venderías por semana?</p>
+  <select id="cantidad">
+    <option>1-5</option>
+    <option>5-20</option>
+    <option>20-50</option>
+    <option>+50</option>
+  </select>
+
+  <br><br>
+
+  <button type="submit">Acceder al canal</button>
+
+</form>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  // Evento de conversión
+  fbq('track', 'Lead');
+
+  // Redirección al canal
+  window.location.href = "LINK_DE_TU_CANAL";
+});
+</script>
+
+</body>
+</html>
