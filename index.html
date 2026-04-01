@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- 🚫 BLOQUEA ZOOM EN MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Acceso Mayorista</title>
@@ -29,67 +28,111 @@ fbq('track', 'PageView');
 </script>
 
 <style>
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f0f0f;
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(180deg, #0a0a0a, #111);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  -webkit-user-select: none;
-  user-select: none;
+  min-height: 100vh;
 }
 
+/* CONTENEDOR */
 .container {
-  background: #1a1a1a;
-  padding: 25px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  background: #121212;
+  padding: 28px;
+  border-radius: 16px;
+  width: 92%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
+/* TITULOS */
 h1 {
-  font-size: 22px;
+  font-size: 24px;
+  margin-bottom: 5px;
 }
 
 .sub {
   font-size: 14px;
-  color: #aaa;
-  margin-bottom: 20px;
+  color: #9b9b9b;
+  margin-bottom: 25px;
 }
 
+/* PREGUNTAS */
 .question {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
+.question p {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+/* OPCIONES */
 .option {
   display: block;
-  background: #2a2a2a;
-  padding: 12px;
+  background: #1d1d1d;
+  padding: 14px;
   margin-top: 8px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid #2a2a2a;
+  transition: all 0.2s ease;
+}
+
+.option:hover {
+  background: #262626;
 }
 
 .option.selected {
-  border: 2px solid #25D366;
-  background: #1f3d2b;
+  border: 1px solid #25D366;
+  background: rgba(37, 211, 102, 0.15);
+  transform: scale(1.02);
 }
 
+/* BOTON */
 button {
   width: 100%;
-  padding: 14px;
-  margin-top: 25px;
-  background: #25D366;
+  padding: 15px;
+  margin-top: 30px;
+  background: linear-gradient(135deg, #25D366, #1ebe5d);
   color: black;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(37,211,102,0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .container {
+    padding: 22px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
+
 </style>
 
 </head>
@@ -118,12 +161,12 @@ button {
 <div class="option" data-q="cantidad">+50</div>
 </div>
 
+<!-- 🔥 NUEVA PREGUNTA -->
 <div class="question">
-<p>¿Cómo venderías los productos?</p>
-<div class="option" data-q="canal">Instagram</div>
-<div class="option" data-q="canal">WhatsApp</div>
-<div class="option" data-q="canal">Tienda online</div>
-<div class="option" data-q="canal">No sé todavía</div>
+<p>¿Cuándo sería tu próxima compra?</p>
+<div class="option" data-q="compra">En los próximos 10 días</div>
+<div class="option" data-q="compra">En los próximos 20 días</div>
+<div class="option" data-q="compra">Solo estoy mirando</div>
 </div>
 
 <button type="submit">Acceder al canal</button>
@@ -139,7 +182,6 @@ document.querySelectorAll(".option").forEach(el => {
   el.addEventListener("click", () => {
     let q = el.getAttribute("data-q");
 
-    // limpiar selección anterior
     document.querySelectorAll(`[data-q="${q}"]`).forEach(e => {
       e.classList.remove("selected");
     });
@@ -152,8 +194,7 @@ document.querySelectorAll(".option").forEach(el => {
 document.getElementById("form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  // validar
-  if(!respuestas.ventas || !respuestas.cantidad || !respuestas.canal){
+  if(!respuestas.ventas || !respuestas.cantidad || !respuestas.compra){
     alert("Completá todas las opciones");
     return;
   }
@@ -163,7 +204,7 @@ document.getElementById("form").addEventListener("submit", function(e) {
   fbq('track', 'Lead', {
     ventas: respuestas.ventas,
     cantidad: respuestas.cantidad,
-    canal: respuestas.canal
+    compra: respuestas.compra
   }, {eventID});
 
   setTimeout(() => {
